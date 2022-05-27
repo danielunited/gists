@@ -138,7 +138,7 @@
 
   if (hasWebGL()) {
     window
-      .fetch("./points.json")
+      .fetch("https://cdn.jsdelivr.net/gh/danielunited/gists/globe/points.json")
       .then((response) => response.json())
       .then((data) => {
         init(data.points);
