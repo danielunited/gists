@@ -1,6 +1,6 @@
 (function () {
   const container = document.getElementById("globe");
-  const canvas = document.getElementsByTagName("canvas")[0];
+  const canvas = container.getElementsByTagName("canvas")[0];
 
   function init(points) {
     const { width, height } = container.getBoundingClientRect();
