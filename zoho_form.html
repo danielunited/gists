@@ -1,0 +1,103 @@
+<!-- Note :
+   - You can modify the font style and form style to suit your website. 
+   - Code lines with comments Do not remove this code are required for the form to work properly, make sure that you do not remove these lines of code. 
+   - The Mandatory check script can modified as to suit your business needs. 
+   - It is important that you test the modified form before going live.-->
+<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+   <META HTTP-EQUIV ='content-type' CONTENT='text/html;charset=UTF-8'>
+   <form action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5166693000001627003 method='POST' onSubmit='javascript:document.charset="UTF-8"; return checkMandatory5166693000001627003()' accept-charset='UTF-8' class="flex-sides flex-wrap">
+ <input type='text' style='display:none;' name='xnQsjsdp' value='667d57343a01e2721d8818013fc1d2ffa3c1f06cde8ade8a3b10a517bf8b3ae7'></input> 
+ <input type='hidden' name='zc_gad' id='zc_gad' value=''></input> 
+ <input type='text' style='display:none;' name='xmIwtLD' value='32a94df66a544de372423d166bc6febb87c87e2fa24d53cc69304b86ffa531cb'></input> 
+ <input type='text'  style='display:none;' name='actionType' value='TGVhZHM='></input>
+ <input type='text' style='display:none;' name='returnURL' value='https&#x3a;&#x2f;&#x2f;www.startupbooster.dev&#x2f;thank-you' > </input>
+ <style>
+    form div {width: 100%;}
+ </style>
+<div><div style='font-size:12px; font-family: Arial;'></div><div><input type='text' class="text-field cta-field w-input" placeholder="First name" id='First_Name' name='First Name' maxlength='40'></input><div></div></div></div>
+<div><div style='font-size:12px; font-family: Arial;'></div><div><input type='text' class="text-field cta-field w-input" placeholder="Last name" id='Last_Name' name='Last Name' maxlength='80'></input><div></div></div></div>
+<div><div style='font-size:12px; font-family: Arial;'></div><div><input type='text' class="text-field cta-field w-input" id='Mobile' name='Mobile' maxlength='30' placeholder="Phone"></input><div></div></div></div>
+<div><div style='font-size:12px; font-family: Arial;'></div><div><input type='text'  class="text-field cta-field w-input" placeholder="Email" ftype='email' id='Email' name='Email' maxlength='100'></input><div></div></div></div>
+<div><div style='font-size:12px; font-family: Arial;'></div><div><textarea id='Description' class="text-field cta-field message-field w-input" placeholder="How can we help? (Optional)" name='Description'></textarea><div></div></div></div><div><div></div>
+<div><input type='submit' id='formsubmit' class="btn _w-100 w-button" value='Send message' title='Send message'></div></div>
+	<script>
+	function validateEmail5166693000001627003()
+	{
+		var form = document.forms['WebToLeads5166693000001627003'];
+		var emailFld = form.querySelectorAll('[ftype=email]');
+		var i;
+		for (i = 0; i < emailFld.length; i++)
+		{
+			var emailVal = emailFld[i].value;
+			if((emailVal.replace(/^\s+|\s+$/g, '')).length!=0 )
+			{
+				var atpos=emailVal.indexOf('@');
+				var dotpos=emailVal.lastIndexOf('.');
+				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailVal.length)
+				{
+					alert('Please enter a valid email address. ');
+					emailFld[i].focus();
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+ 	  function checkMandatory5166693000001627003() {
+		var mndFileds = new Array('First Name','Last Name','Email','Mobile');
+		var fldLangVal = new Array('First\x20Name','Last\x20Name','Email','Mobile');
+		for(i=0;i<mndFileds.length;i++) {
+		  var fieldObj=document.forms['WebToLeads5166693000001627003'][mndFileds[i]];
+		  if(fieldObj) {
+			if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length==0) {
+			 if(fieldObj.type =='file')
+				{ 
+				 alert('Please select a file to upload.'); 
+				 fieldObj.focus(); 
+				 return false;
+				} 
+			alert(fldLangVal[i] +' cannot be empty.'); 
+   	   	  	  fieldObj.focus();
+   	   	  	  return false;
+			}  else if(fieldObj.nodeName=='SELECT') {
+  	   	   	 if(fieldObj.options[fieldObj.selectedIndex].value=='-None-') {
+				alert(fldLangVal[i] +' cannot be none.'); 
+				fieldObj.focus();
+				return false;
+			   }
+			} else if(fieldObj.type =='checkbox'){
+ 	 	 	 if(fieldObj.checked == false){
+				alert('Please accept  '+fldLangVal[i]);
+				fieldObj.focus();
+				return false;
+			   } 
+			 } 
+			 try {
+			     if(fieldObj.name == 'Last Name') {
+				name = fieldObj.value;
+ 	 	 	    }
+			} catch (e) {}
+		    }
+		}
+		if(!validateEmail5166693000001627003()){return false;}
+		document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', true);
+	}
+
+function tooltipShow5166693000001627003(el){
+	var tooltip = el.nextElementSibling;
+	var tooltipDisplay = tooltip.style.display;
+	if(tooltipDisplay == 'none'){
+		var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
+		for(i=0; i<allTooltip.length; i++){
+			allTooltip[i].style.display='none';
+		}
+		tooltip.style.display = 'block';
+	}else{
+		tooltip.style.display='none';
+	}
+}
+</script>
+	<!-- Do not remove this --- Analytics Tracking code starts --><script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=32a94df66a544de372423d166bc6febb87c87e2fa24d53cc69304b86ffa531cbgid667d57343a01e2721d8818013fc1d2ffa3c1f06cde8ade8a3b10a517bf8b3ae7gid885e3c1045bd9bdcc91bdf30f82b5696gid14f4ec16431e0686150daa43f3210513&tw=61690b96c1d0471b638f31426f38e68aa67fb7ed6da86f32dc10ad817fe55a0a'></script><!-- Do not remove this --- Analytics Tracking code ends. --></form>
+</div>
