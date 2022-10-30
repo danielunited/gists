@@ -1008,7 +1008,7 @@ body>div.section.wf-section>div {
   margin-bottom: -24px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 767px) {
   .related-templates {
     margin-top: 0px;
     font-family: Sora, sans-serif;
