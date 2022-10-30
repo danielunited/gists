@@ -861,6 +861,16 @@ label {
   text-align: left;
 }
 
+.template-heading {
+  margin-top: 0px;
+  margin-bottom: 12px;
+  font-family: Sora, sans-serif;
+  font-size: 42px;
+  line-height: 52px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
 .template-tab {
   margin-top: 8px;
   margin-right: 12px;
