@@ -220,10 +220,6 @@ label {
   align-items: center;
 }
 
-.container.max-size-container {
-  max-width: 100%;
-}
-
 .lead {
   font-size: 22px;
   line-height: 34px;
