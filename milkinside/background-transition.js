@@ -103,14 +103,14 @@
   startTimeMobile = positions[0].mobile.now[0];
   endTimeMobile = positions[0].mobile.now[1];
 
-  $("#videoHero").bind("timeupdate", function () {
+  $("#video-hero").bind("timeupdate", function () {
     if (this.currentTime > endTimeWeb)
       this.currentTime = startTimeWeb;
     if (this.currentTime < startTimeWeb)
       this.currentTime = startTimeWeb;
   });
 
-  $("#videoHeroMobile").bind("timeupdate", function () {
+  $("#video-hero-mobile").bind("timeupdate", function () {
     if (this.currentTime > endTimeMobile)
       this.currentTime = startTimeMobile;
     if (this.currentTime < startTimeMobile)
