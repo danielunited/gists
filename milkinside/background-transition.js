@@ -29,18 +29,33 @@
   };
 
   const initializeVideo = () => {
-    videos.each(i => {
-      if (!$(videos[i]).is(":hidden")) {
-        videos[i].play()
-          .then(() => {
-            videos[i].pause();
-            console.warn('Browser with Autoplay');
-            setTimeout(() => videos[i].play(), 3000);
-          }).catch(() => {
-          console.warn('Browser without Autoplay');
-          setTimeout(() => videos[i].play(), 3000);
-        })
-      }
+    $('.trigger').click((event) => {
+      videos.each(i => {
+        videos[i].pause();
+        if (!$(videos[i]).is(":hidden")) {
+          videos[i].play()
+            .then(() => {
+              videos[i].pause();
+              console.warn('Browser with Autoplay');
+              setTimeout(() => {
+                videos[i].play();
+                videos[i].onended = function () {
+                  this.load();
+                  this.play();
+                };
+              }, loaderDuration * 1000);
+            }).catch(() => {
+              console.warn('Browser without Autoplay');
+              setTimeout(() => {
+                videos[i].play();
+                videos[i].onended = function () {
+                  this.load();
+                  this.play();
+                };
+              }, loaderDuration * 1000);
+            })
+        }
+      });
     });
   };
 
@@ -60,17 +75,19 @@
       [ startTimeWeb, endTimeWeb, deltaIndex ] = playQueue[0];
       this.currentTime = startTimeWeb;
 
-      if (playQueue.length <= 2) {
-        const transitionLength = endTimeWeb - this.currentTime;
+      if (playQueue.length <= 2 && $('.main').hasClass('transition-fade-out')) {
+        const transitionLength = endTimeWeb - startTimeWeb + frameGap;
         /** main transition marker */
         $('.main').removeClass('transition-fade-out');
         /** transition fade in video background */
-        $(this).css({
-          'transition': `opacity ${transitionLength}s ease-in-out`,
-          '-moz-transition': `opacity ${transitionLength}s ease-in-out`,
-          '-webkit-transition': `opacity ${transitionLength}s ease-in-out`,
-          'opacity': 1
-        });
+        setTimeout(() => {
+          $(this).css({
+            'transition': `opacity ${transitionLength}s ease-in-out`,
+            '-moz-transition': `opacity ${transitionLength}s ease-in-out`,
+            '-webkit-transition': `opacity ${transitionLength}s ease-in-out`,
+            'opacity': 1
+          }, frameGap * 1000);
+        })
       }
     }
     /** stabilize currentTime */
@@ -78,16 +95,18 @@
       this.currentTime = startTimeWeb;
     }
     if (isSkip) {
-      const transitionLength = endTimeWeb - this.currentTime;
+      const transitionLength = endTimeWeb - this.currentTime + frameGap;
       /** main transition marker */
       $('.main').addClass('transition-fade-out');
       /** transition fade out video background */
-      $(this).css({
-        'transition': `opacity ${transitionLength}s ease-in-out`,
-        '-moz-transition': `opacity ${transitionLength}s ease-in-out`,
-        '-webkit-transition': `opacity ${transitionLength}s ease-in-out`,
-        'opacity': 0
-      });
+      setTimeout(() => {
+        $(this).css({
+          'transition': `opacity ${transitionLength}s ease-in-out`,
+          '-moz-transition': `opacity ${transitionLength}s ease-in-out`,
+          '-webkit-transition': `opacity ${transitionLength}s ease-in-out`,
+          'opacity': 0
+        });
+      }, frameGap * 1000);
       isSkip = false;
     }
   });

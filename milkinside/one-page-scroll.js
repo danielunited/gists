@@ -223,7 +223,7 @@
       const body = $('body');
       if (valForTest) {
         body.addClass('disabled-onepage-scroll');
-        $(document).unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
+        body.unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
         el.swipeEvents().unbind('swipeDown swipeUp');
       } else {
         if(body.hasClass('disabled-onepage-scroll')) {
@@ -240,7 +240,7 @@
           el.moveDown();
         });
 
-        $(document).bind('mousewheel DOMMouseScroll MozMousePixelScroll', (event) => {
+        $('body').bind('mousewheel DOMMouseScroll MozMousePixelScroll', (event) => {
           event.preventDefault();
           const delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
           init_scroll(event, delta);
@@ -363,7 +363,7 @@
     }
 
 
-    $(document).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(event) {
+    $('body').bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(event) {
       event.preventDefault();
       const delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
       if(!$('body').hasClass('disabled-onepage-scroll')) {
@@ -382,7 +382,7 @@
 
     if(settings.keyboard === true) {
       $(document).keydown(function(e) {
-        var tag = e.target.tagName.toLowerCase();
+        const tag = e.target.tagName.toLowerCase();
 
         if (!$('body').hasClass('disabled-onepage-scroll')) {
           switch(e.which) {
