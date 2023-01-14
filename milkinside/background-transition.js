@@ -114,6 +114,7 @@
   let processing = false;
   $('.main').onepage_scroll({
     sectionContainer: 'section',
+    scrollContainer: '.main-wrapper',
     easing: 'none',
     animationTime: 1000,
     pagination: true,

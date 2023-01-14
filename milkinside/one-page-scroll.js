@@ -2,6 +2,7 @@
 
   const defaults = {
     sectionContainer: 'section',
+    scrollContainer: 'body',
     easing: 'ease',
     animationTime: 1000,
     pagination: true,
@@ -124,7 +125,7 @@
         $(`.onepage-pagination li a[data-index='${next.data('index')}']`).addClass('active');
       }
 
-      const body = $('body');
+      const body = $(settings.scrollContainer);
       body[0].className = body[0].className.replace(/\bviewing-page-\d.*?\b/g, '');
       body.addClass(`viewing-page-${next.data('index')}`)
 
@@ -161,7 +162,7 @@
         $(`.onepage-pagination li a[data-index='${index}']`).removeClass('active');
         $(`.onepage-pagination li a[data-index='${next.data("index")}']`).addClass('active');
       }
-      const body = $('body');
+      const body = $(settings.scrollContainer);
       body[0].className = body[0].className.replace(/\bviewing-page-\d.*?\b/g, '');
       body.addClass(`viewing-page-${next.data('index')}`)
 
@@ -220,7 +221,7 @@
         }
       }
 
-      const body = $('body');
+      const body = $(settings.scrollContainer);
       if (valForTest) {
         body.addClass('disabled-onepage-scroll');
         body.unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
@@ -240,7 +241,7 @@
           el.moveDown();
         });
 
-        $('body').bind('mousewheel DOMMouseScroll MozMousePixelScroll', (event) => {
+        $(settings.scrollContainer).bind('mousewheel DOMMouseScroll MozMousePixelScroll', (event) => {
           event.preventDefault();
           const delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
           init_scroll(event, delta);
@@ -294,16 +295,16 @@
     });
 
     el.swipeEvents().bind('swipeDown',  (event) => {
-      if (!$('body').hasClass('disabled-onepage-scroll')) event.preventDefault();
+      if (!$(settings.scrollContainer).hasClass('disabled-onepage-scroll')) event.preventDefault();
       el.moveUp();
     }).bind('swipeUp', function(event){
-      if (!$('body').hasClass('disabled-onepage-scroll')) event.preventDefault();
+      if (!$(settings.scrollContainer).hasClass('disabled-onepage-scroll')) event.preventDefault();
       el.moveDown();
     });
 
     // Create Pagination and Display Them
     if (settings.pagination === true) {
-      if ($('ul.onepage-pagination').length < 1) $("<ul class='onepage-pagination'></ul>").prependTo('body');
+      if ($('ul.onepage-pagination').length < 1) $("<ul class='onepage-pagination'></ul>").prependTo(settings.scrollContainer);
 
       if( settings.direction === 'horizontal' ) {
         posLeft = (el.find('.onepage-pagination').width() / 2) * -1;
@@ -321,7 +322,7 @@
     if (window.location.hash !== "" && window.location.hash !== "#1") {
       init_index = window.location.hash.replace("#", "")
 
-      const body = $('body');
+      const body = $(settings.scrollContainer);
       if (parseInt(init_index) <= total && parseInt(init_index) > 0) {
         $(settings.sectionContainer + `[data-index='${init_index}']`).addClass('active')
         body.addClass('viewing-page-' + init_index)
@@ -349,7 +350,7 @@
       }
     } else {
       $(`${settings.sectionContainer}[data-index='1']`).addClass('active')
-      $('body').addClass('viewing-page-1')
+      $(settings.scrollContainer).addClass('viewing-page-1')
       if (settings.pagination === true) {
         $(`.onepage-pagination li a[data-index='1']`).addClass('active');
       }
@@ -363,10 +364,10 @@
     }
 
 
-    $('body').bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(event) {
+    $(settings.scrollContainer).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(event) {
       event.preventDefault();
       const delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-      if(!$('body').hasClass('disabled-onepage-scroll')) {
+      if(!$(settings.scrollContainer).hasClass('disabled-onepage-scroll')) {
         init_scroll(event, delta);
       }
     });
@@ -384,7 +385,7 @@
       $(document).keydown(function(e) {
         const tag = e.target.tagName.toLowerCase();
 
-        if (!$('body').hasClass('disabled-onepage-scroll')) {
+        if (!$(settings.scrollContainer).hasClass('disabled-onepage-scroll')) {
           switch(e.which) {
             case 38:
               if (tag !== 'input' && tag !== 'textarea') el.moveUp()
