@@ -1,0 +1,21 @@
+<script>
+    let logoImageURL = "https://assets.website-files.com/61ee6efd2b720077360f518e/634eb4c839f5e6254d5a8675_alternative-layout-logo.svg";
+    if (window.location.href.indexOf("white-background") == -1 && window.location.href.indexOf("purple-background") == -1) {
+        var navbarLogo = document.querySelectorAll(".navbar-logo");
+        for (var i = 0; i < navbarLogo.length; i++) {
+            navbarLogo[i].src = logoImageURL;
+        }
+    }
+    else if (window.location.href.indexOf("purple-background") > -1) {
+        var templateBoxes = document.querySelectorAll(".single-template-link");
+        for (var i = 0; i < templateBoxes.length; i++) {
+            templateBoxes[i].href += "?purple-background";
+        }
+    }
+    else if (window.location.href.indexOf("white-background") > -1) {
+        var templateBoxes = document.querySelectorAll(".single-template-link");
+        for (var i = 0; i < templateBoxes.length; i++) {
+            templateBoxes[i].href += "?white-background";
+        }
+    }
+</script>
