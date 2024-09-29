@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rate Our App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .stars {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .star {
+        font-size: 40px;
+        cursor: pointer;
+        padding: 0 10px;
+        color: lightgray;
+      }
+
+      .star:hover,
+      .star.active {
+        color: gold;
+      }
+
+      #feedbackMessage,
+      #improveSection {
+        display: none;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ff0000;
+      }
+
+      textarea {
+        width: 80%;
+        height: 100px;
+        margin-top: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>How would you rate Gatewise app?</h1>
+
+    <div class="stars">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+
+    <p id="feedbackMessage">Thank you for your feedback!</p>
+
+    <div id="improveSection">
+      <p>How can we improve?</p>
+      <textarea id="improveText" placeholder="Enter your feedback..."></textarea><br />
+      <button id="submitFeedback">Submit</button>
+    </div>
+
+    <script>
+      const stars = document.querySelectorAll('.star');
+      const improveSection = document.getElementById('improveSection');
+      const feedbackMessage = document.getElementById('feedbackMessage');
+      const submitButton = document.getElementById('submitFeedback');
+
+      stars.forEach((star) => {
+        star.addEventListener('mouseover', handleMouseOver);
+        star.addEventListener('mouseout', resetStars);
+        star.addEventListener('click', handleRating);
+
+        star.addEventListener('touchstart', handleMouseOver);
+        star.addEventListener('touchend', handleRating);
+      });
+
+      function handleMouseOver(e) {
+        resetStars();
+        const star = e.target;
+        star.style.color = 'gold';
+        let prevStar = star.previousElementSibling;
+        while (prevStar) {
+          prevStar.style.color = 'gold';
+          prevStar = prevStar.previousElementSibling;
+        }
+      }
+
+      function resetStars() {
+        stars.forEach((star) => {
+          star.style.color = 'lightgray';
+        });
+      }
+
+      function handleRating(e) {
+        const rating = e.target.getAttribute('data-value');
+        resetFeedback();
+        if (rating == 5) {
+          // Detect if the device is iPhone or Android
+          const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+          const isAndroid = /Android/i.test(navigator.userAgent);
+
+          if (isIOS) {
+            // Open App Store review link for iPhone
+            window.open('https://apps.apple.com/app/id1080871199?action=write-review', '_blank');
+          } else if (isAndroid) {
+            // Open Play Store link for Android
+            window.open('https://play.google.com/store/apps/details?id=com.gatewise.android', '_blank');
+          } else {
+            // Fallback for other devices or browsers
+            window.open('https://gatewise.com', '_blank');
+          }
+        } else if (rating <= 3) {
+          improveSection.style.display = 'block';
+        } else {
+          feedbackMessage.style.display = 'block';
+          feedbackMessage.innerText = 'Thank you for your feedback!';
+        }
+
+        setActiveStars(e.target);
+      }
+
+      submitButton.addEventListener('click', function () {
+        const feedback = document.getElementById('improveText').value;
+        if (feedback.trim() !== '') {
+          sendEmail(feedback);
+          feedbackMessage.style.display = 'block';
+          feedbackMessage.innerText = 'Thank you for your feedback!';
+          improveSection.style.display = 'none';
+        } else {
+          alert('Please enter your feedback before submitting.');
+        }
+      });
+
+      function setActiveStars(star) {
+        resetStars();
+        star.style.color = 'gold';
+        let prevStar = star.previousElementSibling;
+        while (prevStar) {
+          prevStar.style.color = 'gold';
+          prevStar = prevStar.previousElementSibling;
+        }
+      }
+
+      function resetFeedback() {
+        improveSection.style.display = 'none';
+        feedbackMessage.style.display = 'none';
+      }
+
+      function sendEmail(feedback) {
+        const mailtoLink = `mailto:support@gatewise.com?subject=App Feedback&body=${encodeURIComponent(feedback)}`;
+        window.location.href = mailtoLink;
+      }
+    </script>
+  </body>
+</html>
